@@ -1,6 +1,5 @@
 library vuex4flutter;
 
-import 'package:rxdart/rxdart.dart';
 import './types/index.dart';
 export './types/index.dart';
 
@@ -9,7 +8,6 @@ class Store {
   Map<String, Getter> _getters = {};
   Map<String, Mutation> _mutations = {};
   Map<String, dynamic> _state = {};
-  BehaviorSubject _stateSubject;
 
   Store(Module module) {
     assert(module != null, 'State must be at least an empty object');
@@ -37,12 +35,6 @@ class Store {
     final actionFn = _actions[action];
 
     return actionFn(this.commit, state, params);
-  }
-
-  void closeSubscription() {
-    if (!(_stateSubject?.isClosed ?? true)) {
-      _stateSubject.close();
-    }
   }
 
   void registerModule(Module module, [String namespace = '']) {
