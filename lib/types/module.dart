@@ -1,7 +1,7 @@
 import './index.dart';
 
 class Module {
-  String get namespace => this.runtimeType.toString();
+  String get name => this.runtimeType.toString();
 
   final Map<String, dynamic> state;
   final List<Mutation> mutations;

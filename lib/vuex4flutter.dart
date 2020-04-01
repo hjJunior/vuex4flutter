@@ -10,31 +10,42 @@ class Store {
   Map<String, dynamic> _state = {};
 
   Store(Module module) {
-    assert(module != null, 'State must be at least an empty object');
+    assert(module != null, '[vuex4flutter] You must have at least one root module');
     registerModule(module);
   }
-
-  Map<String, dynamic> get state => _state['/'];
 
   T getter<T>(String getterPath) {
     assert(_getters.containsKey(getterPath), '[vuex4flutter] unknown getter: $getterPath');
     final getterFn = _getters[getterPath];
+    final module = _modulePathFor(getterPath);
 
-    return getterFn(state);
+    final localGetter = (String getter) {
+      final normalizedModule = module.split('//').skip(1).join();
+
+      return this.getter('$normalizedModule$getter');
+    };
+
+    return getterFn(
+      state: _state[module],
+      rootState: _state,
+      getter: localGetter,
+      rootGetter: this.getter,
+    );
   }
 
   void commit(String mutation, [dynamic params]) {
     assert(_mutations.containsKey(mutation), '[vuex4flutter] unknown mutation type: $mutation');
     final mutationFn = _mutations[mutation];
+    final module = _modulePathFor(mutation);
 
-    mutationFn(state, params);
+    mutationFn(_state[module], params);
   }
 
   T dispatch<T>(String action, [dynamic params]) {
     assert(_actions.containsKey(action), '[vuex4flutter] unknown action type: $action');
     final actionFn = _actions[action];
 
-    return actionFn(this.commit, state, params);
+    return actionFn(this.commit, _state, params);
   }
 
   void registerModule(Module module, [String namespace = '']) {
@@ -48,7 +59,7 @@ class Store {
     }
 
     module.modules.forEach((module) {
-      final nextNamespace = '$namespace/${module.namespace}';
+      final nextNamespace = '$namespace/${module.name}';
 
       registerModule(module, nextNamespace);
     });
@@ -56,10 +67,17 @@ class Store {
 
   void _registerProperties(List properties, {Map on, String namespace = '' }) {
     properties?.forEach((property) {
-      final key = '$namespace${property.runtimeType.toString()}';
+      final key = '$namespace/${property.name}';
 
       on[key] = property;
     });
+  }
+
+  String _modulePathFor(String property) {
+    final path = property.split('/').skip(1);
+    final module = '/' + path.take(1).take(path.length - 1).join('/');
+
+    return module;
   }
 }
 

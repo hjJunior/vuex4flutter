@@ -6,61 +6,65 @@ void main() {
   test('adds one to input values', () async {
     final store = Store(
       Module(
-        state: { 'oi': true },
-        mutations: [
-          ChangeOiMutation(),
-        ],
-        actions: [
-          ToggleOiAction(),
-        ],
-        getters: [
-          ToggledOiGetter(),
-        ],
         modules: [
           CartModule(),
         ]
       ),
     );
 
-    print(store.state);
+    expect(store.getter('/cart/isEmpty'), isTrue);
 
-    store.commit('ChangeOiMutation', false);
+    await store.dispatch('/cart/FetchCartItemsAction');
 
-    print(store.state);
-
-    final result = await store.dispatch('ToggleOiAction');
-
-    print(result);
-
-    print(store.state);
-
-    print(store.getter('ToggledOiGetter'));
+    expect(store.getter('/cart/isEmpty'), isFalse);
   });
 }
 
 class CartModule extends Module {
-  final Map<String, dynamic> state = { 'isFetching': true };
+  @override
+  String get name => 'cart';
+
+  final Map<String, dynamic> state = {
+    'fetchingItems': false,
+    'items': [],
+  };
+
+  final List<Getter> getters = [
+    IsCartEmptyGetter(),
+  ];
+
+  final List<Mutation> mutations = [
+    UpdateCartItemsMutation(),
+  ];
+
+  final List<Action> actions = [
+    FetchCartItemsAction(),
+  ];
 }
 
-class ChangeOiMutation implements Mutation {
+class IsCartEmptyGetter extends Getter {
   @override
-  void call(Map<String, dynamic> state, dynamic payload) {
-    state['oi'] = payload;
+  String get name => 'isEmpty';
+
+  @override
+  call({Map<String, dynamic> state, Map<String, dynamic> rootState, getter, rootGetter}) {
+    return (state['items'] as List).isEmpty;
   }
 }
 
-class ToggleOiAction implements Action<Future<String>> {
+class UpdateCartItemsMutation extends Mutation {
   @override
-  Future<String> call(CommitFn commit, Map<String, dynamic> state, params) {
-    commit('ChangeOiMutation', !state['oi']);
-
-    return Future.value('Any value');
+  void call(Map<String, dynamic> state, payload) {
+    state['items'] = payload;
   }
 }
 
-class ToggledOiGetter implements Getter {
+class FetchCartItemsAction extends Action {
   @override
-  bool call(Map<String, dynamic> state) {
-    return !state['oi'];
+  Future<void> call(CommitFn commit, Map<String, dynamic> state, [dynamic params]) async {
+    await Future.delayed(Duration(milliseconds: 300));
+    final items = ['fake-item'];
+
+    commit('/cart/UpdateCartItemsMutation', items);
   }
 }
