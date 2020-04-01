@@ -1,0 +1,15 @@
+name: example
+description: A new Flutter project.
+
+dependencies:
+  vuex4flutter:
+    path: ../
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
