@@ -6,6 +6,8 @@ Vuex4Flutter is a state management pattern that provides a VueX like interface. 
 
 [Docs](https://helio-junior.gitbook.io/vuex4flutter/)
 
+**Not ready to production:** Currently this package is under developer preview.
+
 
 ## Getting starting
 
