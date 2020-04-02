@@ -1,6 +1,6 @@
 # Mutations
 
-## Defining the mutation
+## Defining a mutation
 
 ```dart
 class UpdateMessageMutation extends Mutation {
@@ -15,7 +15,7 @@ class UpdateMessageMutation extends Mutation {
 ```
 
 {% hint style="warning" %}
-All mutations should be sync, if do you need to perform async operations you must use an action
+All mutations should be sync, if you need to perform async operations you must use an action
 {% endhint %}
 
 ## Registering the mutation on Store
@@ -25,7 +25,7 @@ class MyStore extends Store {
   MyStore() : super(
     Module(
       state: {
-        'message': 'An message',
+        'message': 'A message',
       },
       mutations: [
         UpdateMessageMutation(),
@@ -35,9 +35,8 @@ class MyStore extends Store {
 }
 ```
 
-## Commiting an change
+## Commiting a change
 
 ```dart
 store.commit('/changeMessage', 'New message');
 ```
-
