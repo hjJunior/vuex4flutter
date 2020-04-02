@@ -33,18 +33,16 @@ class Home extends StatelessWidget {
 class Content extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Vuex4FlutterConnector(
-      builder: (context, store) {
-        final isEmpty = store.getter('/cart/isEmpty');
-        final isFetching = store.getter('/cart/isFetching');
+    return Vuex4FlutterConnector(builder: (context, store) {
+      final isEmpty = store.getter('/cart/isEmpty');
+      final isFetching = store.getter('/cart/isFetching');
 
-        return Center(
-          child: isFetching
+      return Center(
+        child: isFetching
             ? CircularProgressIndicator()
             : Text('The cart is empty: $isEmpty'),
-        );
-      }
-    );
+      );
+    });
   }
 }
 
@@ -62,4 +60,3 @@ class Fab extends StatelessWidget {
     return store.dispatch('/cart/FetchCartItemsAction');
   }
 }
-
