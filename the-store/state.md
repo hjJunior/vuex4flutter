@@ -1,8 +1,6 @@
----
-description: The state of your application is stored in a dynamic Map
----
-
 # State
+
+The state of your application is stored in a dynamic Map
 
 ## Defining the state object
 
