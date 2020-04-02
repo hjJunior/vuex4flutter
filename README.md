@@ -1,8 +1,10 @@
 # Vuex4Flutter
 [![Pub](https://img.shields.io/pub/v/vuex4flutter.svg)](https://pub.dartlang.org/packages/vuex4flutter)
 
+Vuex4Flutter is a state management pattern that provides a VueX like interface. Super lightweight and more important, testable!
 
-[Docs](https://github.com/hjJunior/vuex4flutter)
+
+[Docs](https://helio-junior.gitbook.io/vuex4flutter/)
 
 
 ## Getting starting
@@ -11,7 +13,7 @@ Add this to your package's pubspec.yaml file:
 
 ```yaml
 dependencies:
-  vuex4flutter: ^0.0.1
+  vuex4flutter: ^0.0.2-dev
 ```
 
 You can install packages from the command line:
