@@ -1,75 +1,39 @@
+---
+description: >-
+  Vuex4Flutter is a state management pattern that provides a VueX like
+  interface. Super lightweight and more important, testable!
+---
+
 # Vuex4Flutter
 
-Developer Preview
+## Before getting starting
 
-### Usage example
+It's strong recommended to already have some experience using Vuex
 
-```dart
+> Vuex is a **state management pattern + library** for Vue.js applications. It serves as a centralized store for all the components in an application, with rules ensuring that the state can only be mutated in a predictable fashion
 
-void main() {
-  test('adds one to input values', () async {
-    final store = Store(
-      Module(
-        modules: [
-          CartModule(),
-        ]
-      ),
-    );
+## Getting starting
 
-    expect(store.getter('/cart/isEmpty'), isTrue);
+Add this to your package's pubspec.yaml file:
 
-    await store.dispatch('/cart/FetchCartItemsAction');
-
-    expect(store.getter('/cart/isEmpty'), isFalse);
-  });
-}
-
-class CartModule extends Module {
-  @override
-  String get name => 'cart';
-
-  final Map<String, dynamic> state = {
-    'fetchingItems': false,
-    'items': [],
-  };
-
-  final List<Getter> getters = [
-    IsCartEmptyGetter(),
-  ];
-
-  final List<Mutation> mutations = [
-    UpdateCartItemsMutation(),
-  ];
-
-  final List<Action> actions = [
-    FetchCartItemsAction(),
-  ];
-}
-
-class IsCartEmptyGetter extends Getter {
-  @override
-  String get name => 'isEmpty';
-
-  @override
-  call({Map<String, dynamic> state, Map<String, dynamic> rootState, getter, rootGetter}) {
-    return (state['items'] as List).isEmpty;
-  }
-}
-
-class UpdateCartItemsMutation extends Mutation {
-  @override
-  void call(Map<String, dynamic> state, payload) {
-    state['items'] = payload;
-  }
-}
-
-class FetchCartItemsAction extends Action {
-  @override
-  Future<void> call(CommitFn commit, Map<String, dynamic> state, [dynamic params]) async {
-    await Future.delayed(Duration(milliseconds: 300));
-    final items = ['fake-item'];
-
-    commit('/cart/UpdateCartItemsMutation', items);
-  }
-}
+{% tabs %}
+{% tab title="pubspec.yaml" %}
+```yaml
+dependencies:
+  vuex4flutter: ^0.0.1
 ```
+{% endtab %}
+{% endtabs %}
+
+{% hint style="info" %}
+ Please, be sure installing the latest stable version
+{% endhint %}
+
+You can install packages from the command line:
+
+```bash
+$ flutter pub get
+```
+
+
+
