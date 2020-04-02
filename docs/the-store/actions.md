@@ -1,6 +1,6 @@
 # Actions
 
-## Defining the action
+## Defining an action
 
 ```dart
 class RevertMessageAction extends Action {
@@ -28,7 +28,7 @@ class MyStore extends Store {
   MyStore() : super(
     Module(
       state: {
-        'message': 'An message',
+        'message': 'A message',
       },
       mutations: [
         UpdateMessageMutation(),
