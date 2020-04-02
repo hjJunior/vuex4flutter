@@ -1,10 +1,9 @@
 # Vuex4Flutter
+[![Pub](https://img.shields.io/pub/v/vuex4flutter.svg)](https://pub.dartlang.org/packages/vuex4flutter)
 
-## Before getting starting
 
-It's strong recommended to already have some experience using Vuex
+[Docs](https://github.com/hjJunior/vuex4flutter)
 
-> Vuex is a **state management pattern + library** for Vue.js applications. It serves as a centralized store for all the components in an application, with rules ensuring that the state can only be mutated in a predictable fashion
 
 ## Getting starting
 
