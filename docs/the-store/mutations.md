@@ -35,9 +35,8 @@ class MyStore extends Store {
 }
 ```
 
-## Commiting the change
+## Commiting a change
 
 ```dart
 store.commit('/changeMessage', 'New message');
 ```
-
