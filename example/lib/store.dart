@@ -1,13 +1,12 @@
 import 'package:vuex4flutter/vuex4flutter.dart';
 
 class MyStore extends Store {
-  MyStore() : super(
-    Module(
-      modules: [
-        CartModule(),
-      ]
-    ),
-  );
+  MyStore()
+      : super(
+          Module(modules: [
+            CartModule(),
+          ]),
+        );
 }
 
 class CartModule extends Module {
@@ -39,7 +38,11 @@ class IsCartEmptyGetter extends Getter {
   String get name => 'isEmpty';
 
   @override
-  call({Map<String, dynamic> state, Map<String, dynamic> rootState, getter, rootGetter}) {
+  call(
+      {Map<String, dynamic> state,
+      Map<String, dynamic> rootState,
+      getter,
+      rootGetter}) {
     return (state['items'] as List).isEmpty;
   }
 }
@@ -49,11 +52,14 @@ class IsFetchingGetter extends Getter {
   String get name => 'isFetching';
 
   @override
-  call({Map<String, dynamic> state, Map<String, dynamic> rootState, getter, rootGetter}) {
+  call(
+      {Map<String, dynamic> state,
+      Map<String, dynamic> rootState,
+      getter,
+      rootGetter}) {
     return state['fetchingItems'];
   }
 }
-
 
 class UpdateCartItemsMutation extends Mutation {
   @override
@@ -71,7 +77,8 @@ class UpdateFetchingStatusMutation extends Mutation {
 
 class FetchCartItemsAction extends Action {
   @override
-  Future<void> call(CommitFn commit, Map<String, dynamic> state, [dynamic params]) async {
+  Future<void> call(CommitFn commit, Map<String, dynamic> state,
+      [dynamic params]) async {
     commit('/cart/UpdateFetchingStatusMutation', true);
 
     await Future.delayed(Duration(milliseconds: 250));

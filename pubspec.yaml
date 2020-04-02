@@ -1,6 +1,6 @@
 name: vuex4flutter
-description: A new Flutter package.
-version: 0.0.1
+description: Vuex4Flutter is a state management pattern that provides a VueX like interface. Super lightweight and more important, testable!
+version: 0.0.2-dev
 homepage: https://github.com/hjJunior/vuex4flutter
 
 environment:
