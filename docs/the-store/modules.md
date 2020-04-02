@@ -107,7 +107,7 @@ class MyStore extends Store {
 
 ## Using features from the module
 
-All the features can be used as quite the same from previously, the unique difference is now is required to change pass the namespace as prefix. Your namespace will be the path for your module
+All the features can be used as quite as the previously ones, the unique difference now, is that you need to pass the namespace as prefix. Your namespace will be the path for your module
 
 {% tabs %}
 {% tab title="Getter" %}
@@ -128,6 +128,3 @@ store.dispatch('/cart/FetchCartItemsAction');
 ```
 {% endtab %}
 {% endtabs %}
-
-
-
